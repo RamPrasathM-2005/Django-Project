@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Workshop Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>Workshop Analytics</h2>
+    <canvas id="workshopChart"></canvas>
+
+    <script>
+        fetch("{% url 'workshop_analytics' %}")
+        .then(response => response.json())
+        .then(data => {
+            const labels = data.map(item => item.workshop);
+            const values = data.map(item => item.certificates);
+
+            new Chart(document.getElementById("workshopChart"), {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Certificates Issued",
+                        data: values,
+                        backgroundColor: "rgba(75,192,192,0.6)"
+                    }]
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Workshops</title>
+</head>
+<body>
+    <h1>Workshops</h1>
+
+    <a href="{% url 'event:analytics_page' %}">View Analytics</a>
+    <hr/>
+
+    <ul>
+    {% for w in workshops %}
+        <li>
+            <strong>{{ w.title }}</strong> — {{ w.date }} — capacity: {{ w.capacity }}<br/>
+            {{ w.description|linebreaksbr }}<br/>
+            <!-- Example enroll link: in real app use logged-in user and POST form -->
+            <a href="{% url 'event:enroll_student' w.id request.user.id %}">Enroll (as {{ request.user.username }})</a>
+            |
+            <a href="{% url 'event:generate_certificate' request.user.id w.id %}">Generate Certificate (for {{ request.user.username }})</a>
+        </li>
+    {% empty %}
+        <li>No workshops available.</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

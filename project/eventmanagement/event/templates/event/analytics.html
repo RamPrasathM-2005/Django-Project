@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Workshop Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Workshop Analytics</h1>
+    <canvas id="certChart" width="800" height="300"></canvas>
+    <canvas id="enrollChart" width="800" height="300" style="margin-top:40px;"></canvas>
+
+    <script>
+    fetch("{% url 'event:workshop_analytics_data' %}")
+        .then(res => res.json())
+        .then(data => {
+            const labels = data.map(d => d.title + " (" + d.date + ")");
+            const certs = data.map(d => d.certificates);
+            const enroll = data.map(d => d.enrolled);
+            // Certificates chart
+            new Chart(document.getElementById('certChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Certificates Issued',
+                        data: certs
+                    }]
+                },
+                options: { responsive: true }
+            });
+            // Enrollment chart
+            new Chart(document.getElementById('enrollChart').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Enrolled',
+                        data: enroll,
+                        tension: 0.3
+                    }]
+                },
+                options: { responsive: true }
+            });
+        })
+        .catch(err => console.error(err));
+    </script>
+</body>
+</html>
