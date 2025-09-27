@@ -81,28 +81,4 @@ Workshops: http://localhost:8000/workshops/
 
 Analytics: http://localhost:8000/analytics/
 
-📂 Project Structure
-csharp
-Copy code
-eventmanagement/
-│── event/
-│ ├── models.py
-│ ├── views.py
-│ ├── urls.py
-│ ├── admin.py
-│ ├── apps.py
-│ └── templates/event/
-│
-│── eventmanagement/
-│ ├── settings.py
-│ └── urls.py
-🌐 URL Endpoints
-/workshops/ → List all workshops
-
-/certificate/<student_id>/<workshop_id>/ → Generate & download certificate
-
-/analytics-data/ → JSON analytics data
-
-/analytics/ → Analytics dashboard
-
 ℹ️ Enrollment and Attendance are handled exclusively through the Django Admin Panel.
