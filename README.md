@@ -1,4 +1,4 @@
-# 🎉 Event Management System
+# 🎉 Workshop Management System
 
 A **Django-based web application** designed to manage workshops with features like **student enrollment, attendance tracking, certificate generation, and analytics**.  
 This project demonstrates contributions from three team members, each responsible for specific modules.
